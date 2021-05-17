@@ -37,7 +37,9 @@
 		$('#intro').backstretch([
 			'Pattabhi/pic1.jpg',
 			'Pattabhi/pic2.jpg',
-			'Pattabhi/pic3.jpg'
+			'Pattabhi/pic3.jpg',
+            'Pattabhi/pic4.jpg',
+            'Pattabhi/pic5.jpg'
 		], {duration: 3000, fade: 750});
 
 		/* ---------------------------------------------- /*
