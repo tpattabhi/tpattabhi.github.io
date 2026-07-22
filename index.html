@@ -1,782 +1,860 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Portfolio">
-	<meta name="author" content="Tejas Pattabhi">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tejas Pattabhi — Staff Engineer</title>
+<meta name="description" content="Tejas Pattabhi — Staff Engineer at Qualcomm. Cloud, distributed systems, and applied AI for autonomous-driving infrastructure. Named co-inventor on two U.S. patents.">
+<meta name="author" content="Tejas Pattabhi">
+<meta property="og:title" content="Tejas Pattabhi — Staff Engineer">
+<meta property="og:description" content="Cloud, distributed systems & applied AI for autonomous-driving infrastructure.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b12; --surface:#10151f; --surface-2:#151b28; --line:#202939; --line-2:#2b3548;
+  --text:#eaf0f8; --muted:#9aa8bf; --faint:#697790;
+  --accent:#5aa2ff; --accent-2:#7bd0c1; --accent-soft:rgba(90,162,255,.10);
+  --max:1140px; --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  line-height:1.65; font-size:16px; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+/* aurora + cursor spotlight */
+.bg-fx{position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(50vw 50vw at 82% -8%, rgba(90,162,255,.13), transparent 60%),
+    radial-gradient(45vw 45vw at -5% 105%, rgba(123,208,193,.09), transparent 60%);
+}
+.bg-grid{position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.4;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(120vw 80vh at 50% 0%, #000 20%, transparent 75%);
+  -webkit-mask-image:radial-gradient(120vw 80vh at 50% 0%, #000 20%, transparent 75%);
+}
+#drivefx{position:fixed; inset:0; width:100%; height:100%; z-index:-2; pointer-events:none; opacity:.5;
+  mask-image:radial-gradient(140vw 90vh at 50% 60%, #000 30%, transparent 80%);
+  -webkit-mask-image:radial-gradient(140vw 90vh at 50% 60%, #000 30%, transparent 80%);}
+@media(prefers-reduced-motion:reduce){#drivefx{display:none}}
+.spotlight{position:fixed; width:520px; height:520px; z-index:-1; pointer-events:none; border-radius:50%;
+  background:radial-gradient(circle, rgba(90,162,255,.10), transparent 60%);
+  transform:translate(-50%,-50%); left:50%; top:20%; transition:opacity .3s; opacity:0}
+a{color:inherit; text-decoration:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.accent{color:var(--accent)}
 
-	<title>Tejas Pattabhi</title>
+.wrap{max-width:var(--max); margin:0 auto; padding-left:32px; padding-right:32px}
+section{padding-top:104px; padding-bottom:104px}
+section + section{border-top:1px solid var(--line)}
+.eyebrow{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; display:block}
+h2.title{font-size:clamp(26px,3.6vw,36px); font-weight:800; letter-spacing:-.025em; margin-bottom:10px}
+.section-sub{color:var(--muted); margin-bottom:44px; max-width:64ch}
 
-	<!-- CSS -->
-	<!-- Bootstrap core CSS -->
-	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+/* nav */
+nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(14px); background:rgba(8,11,18,.7); border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--max); margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between}
+.brand{font-weight:800; letter-spacing:-.02em; font-size:16.5px}
+.brand .dot{color:var(--accent)}
+.nav-links{display:flex; gap:30px; font-size:14.5px}
+.nav-links a{color:var(--muted); transition:color .2s; position:relative}
+.nav-links a:hover{color:var(--text)}
+.nav-links a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:width .25s}
+.nav-links a:hover::after{width:100%}
+.nav-links a.nav-drive{color:var(--accent); font-weight:700; border:1px solid var(--accent); border-radius:100px; padding:5px 14px; background:var(--accent-soft); transition:all .2s; animation:driveGlow 2.6s ease-in-out infinite}
+.nav-links a.nav-drive::after{display:none}
+.nav-links a.nav-drive:hover{color:#06131f; background:var(--accent); transform:translateY(-1px)}
+@keyframes driveGlow{0%,100%{box-shadow:0 0 0 0 rgba(90,162,255,.35)}50%{box-shadow:0 0 14px 1px rgba(90,162,255,.35)}}
+@media(prefers-reduced-motion:reduce){.nav-links a.nav-drive{animation:none}}
+@media(max-width:720px){.nav-links{display:none}}
 
-	<!-- Owl Carousel -->
-	<link href="assets/css/owl.theme.css" rel="stylesheet">
-	<link href="assets/css/owl.carousel.css" rel="stylesheet">
-	<link href="assets/images/logo/favicon.png" rel="icon">
-	
-	<!-- Magnific-popup lightbox -->
-	<link href="assets/css/magnific-popup.css" rel="stylesheet">
+/* hero */
+.hero{padding-top:120px; padding-bottom:96px}
+.status-pill{display:inline-flex; align-items:center; gap:9px; font-size:13px; color:var(--muted); background:var(--surface); border:1px solid var(--line); border-radius:100px; padding:7px 15px; margin-bottom:30px}
+.status-pill .live{width:7px; height:7px; border-radius:50%; background:var(--accent-2); animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,208,193,.5)}70%{box-shadow:0 0 0 9px rgba(123,208,193,0)}100%{box-shadow:0 0 0 0 rgba(123,208,193,0)}}
+.hero h1{font-size:clamp(42px,7.5vw,80px); font-weight:900; letter-spacing:-.04em; line-height:1.0; max-width:15ch}
+.hero h1 .grad{background:linear-gradient(115deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero .role{font-size:clamp(16px,2.2vw,20px); color:var(--muted); margin-top:20px; font-weight:500; font-family:'JetBrains Mono',monospace; letter-spacing:.5px}
+.hero .pitch{margin-top:22px; max-width:58ch; font-size:17px; color:#cdd8e8}
+.cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:34px}
+.btn{display:inline-flex; align-items:center; gap:9px; padding:13px 24px; border-radius:11px; font-weight:600; font-size:14.5px; border:1px solid var(--line); transition:all .2s; cursor:pointer; background:none; color:var(--text); font-family:inherit}
+.btn.primary{background:var(--accent); color:#06131f; border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 8px 24px rgba(90,162,255,.28)}
+.btn.ghost{background:var(--surface)}
+.btn.ghost:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px)}
 
-	<!-- Simple text rotator -->
-	<link href="assets/css/simpletextrotator.css" rel="stylesheet">
+/* stats */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:52px; padding-top:40px; border-top:1px solid var(--line)}
+@media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr); gap:30px 22px}}
+.stat .n{font-size:clamp(24px,3vw,32px); font-weight:800; letter-spacing:-.02em}
+.stat .l{font-size:12.5px; color:var(--muted); margin-top:5px; line-height:1.45}
 
-	<!-- Font Awesome CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+/* about */
+.about-grid{display:grid; grid-template-columns:1.5fr 1fr; gap:52px}
+@media(max-width:840px){.about-grid{grid-template-columns:1fr; gap:34px}}
+.about p{color:var(--muted); margin-bottom:18px}
+.about p:last-child{margin-bottom:0}
+.about p strong{color:var(--text); font-weight:600}
+.side-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px; align-self:start}
+.side-card h4{font-size:12px; text-transform:uppercase; letter-spacing:1.8px; color:var(--faint); margin-bottom:18px; font-family:'JetBrains Mono',monospace}
+.side-card ul{list-style:none; display:flex; flex-direction:column; gap:15px}
+.side-card li{display:flex; gap:11px; font-size:14.5px; color:var(--muted); padding-bottom:15px; border-bottom:1px solid var(--line)}
+.side-card li:last-child{border-bottom:none; padding-bottom:0}
+.side-card li b{color:var(--text); font-weight:600}
+.side-card li .accent{flex:none}
 
-	<!-- Animate css -->
-	<link href="assets/css/animate.css" rel="stylesheet">
+/* timeline */
+.tl-item{display:grid; grid-template-columns:160px 1fr; gap:30px; padding:28px 0; border-top:1px solid var(--line)}
+.tl-item:first-child{border-top:none; padding-top:0}
+.tl-item:last-child{padding-bottom:0}
+@media(max-width:680px){.tl-item{grid-template-columns:1fr; gap:8px}}
+.tl-when{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--faint); padding-top:4px}
+.tl-role{font-size:18px; font-weight:700}
+.tl-role span{color:var(--faint); font-weight:500; font-size:14px}
+.tl-co{color:var(--accent); font-weight:600; font-size:14px; margin:3px 0 11px}
+.tl-body{color:var(--muted); font-size:14.5px}
+.tl-body b{color:var(--text); font-weight:600}
+.tl-ctx{color:var(--muted); font-size:14.5px; margin-bottom:14px}
+.tl-list{list-style:none; display:flex; flex-direction:column; gap:12px; margin-top:6px}
+.tl-list li{position:relative; padding-left:20px; color:var(--muted); font-size:14.5px; line-height:1.6}
+.tl-list li::before{content:"▹"; position:absolute; left:0; top:0; color:var(--accent)}
+.tl-list li b{color:var(--text); font-weight:600}
+.tl-list li a{color:var(--accent); border-bottom:1px solid transparent; transition:border-color .2s}
+.tl-list li a:hover{border-color:var(--accent)}
+.tl-meta{display:flex; flex-wrap:wrap; gap:7px; margin-top:16px}
+.tl-meta .t{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--faint); background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:4px 9px}
 
-	<!-- Custom styles CSS -->
-	<link href="assets/css/style.css" rel="stylesheet" media="screen">
+/* cards */
+.cards{display:grid; grid-template-columns:repeat(2,1fr); gap:22px}
+@media(max-width:760px){.cards{grid-template-columns:1fr}}
+.card{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:28px; transition:transform .22s, border-color .22s; overflow:hidden}
+.card::before{content:""; position:absolute; inset:0; padding:1px; border-radius:var(--radius); background:linear-gradient(130deg,var(--accent),var(--accent-2)); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:0; transition:opacity .25s}
+.card:hover{transform:translateY(-4px)}
+.card:hover::before{opacity:1}
+.card .tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); padding:5px 11px; border-radius:6px; display:inline-block; margin-bottom:16px}
+.card h3{font-size:19px; font-weight:700; margin-bottom:11px; letter-spacing:-.01em}
+.card p{color:var(--muted); font-size:14.5px}
+.card p b{color:var(--text); font-weight:600}
+.card.feature{grid-column:1 / -1; background:linear-gradient(135deg,var(--surface-2),var(--surface))}
+
+/* focus */
+.focus{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+@media(max-width:760px){.focus{grid-template-columns:1fr}}
+.focus-item{padding:24px; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface)}
+.focus-item .ic{font-size:22px; margin-bottom:12px; display:block}
+.focus-item h4{font-size:16px; font-weight:700; margin-bottom:7px}
+.focus-item p{color:var(--muted); font-size:14px}
+
+/* lane-keeper game */
+.game-shell{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px; display:grid; grid-template-columns:1fr 300px; gap:26px; align-items:stretch}
+@media(max-width:820px){.game-shell{grid-template-columns:1fr; gap:20px}}
+.game-stage{position:relative; border-radius:12px; overflow:hidden; background:#05070d; border:1px solid var(--line); min-height:340px}
+#lane{display:block; width:100%; height:100%; touch-action:none}
+.game-overlay{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; padding:24px; background:rgba(5,7,13,.72); backdrop-filter:blur(3px); transition:opacity .25s}
+.game-overlay.hidden{opacity:0; pointer-events:none}
+.game-overlay h4{font-size:20px; font-weight:800; letter-spacing:-.02em}
+.game-overlay p{color:var(--muted); font-size:14px; max-width:34ch}
+.game-modes{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
+.mode-btn{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line-2); border-radius:8px; padding:8px 13px; cursor:pointer; transition:all .18s}
+.mode-btn:hover{color:var(--text); border-color:var(--accent)}
+.mode-btn.is-on{color:#06131f; background:var(--accent); border-color:var(--accent); font-weight:600}
+.game-side{display:flex; flex-direction:column; gap:16px}
+.game-hud{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.hud-box{background:var(--surface-2); border:1px solid var(--line); border-radius:11px; padding:14px 16px}
+.hud-box .k{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:var(--faint)}
+.hud-box .v{font-size:22px; font-weight:800; letter-spacing:-.02em; margin-top:4px}
+.hud-box .v .u{color:var(--accent); font-size:.6em; font-weight:600}
+.game-keys{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted); line-height:1.9}
+.game-keys kbd{background:var(--surface-2); border:1px solid var(--line-2); border-bottom-width:2px; border-radius:6px; padding:2px 8px; font-family:inherit; font-size:12px; color:var(--text)}
+.game-note{color:var(--faint); font-size:12.5px; line-height:1.6; margin-top:auto}
+
+/* skills */
+.skill-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:26px 32px}
+@media(max-width:640px){.skill-groups{grid-template-columns:1fr}}
+.skill-col h4{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:16px}
+.chips{display:flex; flex-wrap:wrap; gap:9px}
+.chip{background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px 13px; font-size:13.5px; color:var(--muted); transition:all .2s}
+.chip:hover{border-color:var(--accent); color:var(--text)}
+
+/* patents */
+.pat{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+@media(max-width:760px){.pat{grid-template-columns:1fr}}
+.pat-item{display:block; background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:12px; padding:22px 24px; transition:all .2s}
+.pat-item:hover{transform:translateY(-3px); border-color:var(--accent); border-left-color:var(--accent-2)}
+.pat-item .no{font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:14px; display:flex; align-items:center; gap:8px}
+.pat-item h4{font-size:15.5px; margin:8px 0 5px; font-weight:600}
+.pat-item .meta{color:var(--faint); font-size:13px}
+.pub{margin-top:22px; padding:22px 24px; background:var(--surface); border:1px solid var(--line); border-radius:12px; color:var(--muted); font-size:14.5px}
+.pub b{color:var(--text)}
+
+/* contact */
+.contact-links{display:flex; flex-direction:column; gap:13px; max-width:480px}
+.contact-links a{display:flex; align-items:center; gap:13px; background:var(--surface); border:1px solid var(--line); padding:16px 20px; border-radius:11px; font-size:14.5px; color:var(--muted); transition:all .2s}
+.contact-links a:hover{border-color:var(--accent); color:var(--text); transform:translateX(4px)}
+.contact-links a .k{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:13px; min-width:22px}
+.contact-row{display:flex; align-items:stretch; gap:9px}
+.contact-row a{flex:1}
+.copy-btn{flex:none; background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:0 16px; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.5px; cursor:pointer; transition:all .2s}
+.copy-btn:hover{border-color:var(--accent); color:var(--text)}
+.copy-btn.copied{border-color:var(--accent-2); color:var(--accent-2)}
+
+/* footer */
+footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); font-size:13.5px}
+.foot-in{max-width:var(--max); margin:0 auto; padding:0 32px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+
+.reveal{opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1; transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none}.status-pill .live{animation:none}}
+</style>
 </head>
 <body>
-
-	<div class="wrapper">
-		<!-- Preloader -->
-		<div id="preloader">
-			<div id="status">
-				<div class="status-mes"><h4>Tejas Pattabhi</h4></div>
-			</div>
-		</div>
-
-		<!-- Navigation start -->
-
-		<nav class="navbar navbar-custom navbar-fixed-top navbar-color" role="navigation">
-			<div class="container">
-
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="http://tejaspattabhi.com/">Tejas Pattabhi</a>
-				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="#intro">home</a></li>
-						<li class=""><a href="#profile">Profile</a></li>
-						<li class=""><a href="#resume">Resume</a></li>
-						<li class=""><a href="#services">Projects</a></li>
-						<li class=""><a href="#contact">Contact</a></li>
-					</ul>
-				</div>
-
-			</div>
-		</nav>
-
-		<!-- Navigation end -->
-		<!-- Intro section start -->
-		<section id="intro" class="section" style="position: relative; z-index: 0; background: none;">
-
-			<div class="container">
-
-				<div class="row">
-
-					<div class="col-md-12">
-
-						<div class="hello wow bounceInDown animated" style="visibility: visible;">
-							<h1>Hi! <br /> I'm Tejas</h1>
-							<h3><span class="rotate" style="text-shadow: black 0px 0px 0px; opacity: 1;"></span></h3>
-						</div>
-					</div>
-
-				</div><!-- .row -->
-
-			</div><!-- .container -->
-
-		<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; z-index: -999998; position: absolute; width: 1903px; height: 651px;"><img src="./Pattabhi/pic1.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; max-height: none; max-width: none; z-index: -999999; width: 1903px; height: 1263.7109375px; left: 0px; top: -306.35546875px;"></div></section>
-
-		<!-- Intro section end -->
-
-		<!-- Profile contact callout section -->
-
-		<section id="profile-contact">
-
-			<div class="container">
-
-				<div class="row">
-                    <center>
-                        <div class="col-sm-4 wow bounceInLeft animated" style="visibility: visible;">
-                            <div class="profile-item">
-                                <i class="fa fa-envelope-o"></i>
-                                <h5><a href="mailto:tejas.pattabhi@gmail.com">tejas.pattabhi@gmail.com</a></h5>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4 wow bounceInUp animated" style="visibility: visible;">
-                            <div class="profile-item">
-                                <i class="fa fa-phone"></i>
-                                <h5>+1 (469) 570 1988</h5>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4 wow bounceInRight animated" style="visibility: visible;">
-                            <div class="profile-item">
-                                <i class="fa fa-map-marker"></i>
-                                <h5><a href="https://www.google.com/maps/place/San+Diego,+CA/" target="_blank">San Diego, CA</a></h5>
-                            </div>
-                        </div>
-                    </center>
-				</div><!-- .row -->
-			</div><!-- .container -->
-		</section>
-
-		<!-- Profile contact callout section -->
-		<!-- Profile section start -->
-		<section id="profile" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 headline wow bounceInDown animated" style="visibility: visible;">
-						<h2>Tejas Pattabhi</h2>
-						<p>Engineer, Developer and DevOps</p>
-					</div>
-
-					<div class="col-md-3 col-sm-6 hidden-xs wow bounceInLeft animated" style="visibility: visible;">
-						<img class="avatar" src="./Pattabhi/me.jpg" alt="">
-					</div>
-
-					<div class="col-md-3 col-sm-6 wow bounceInUp animated" style="visibility: visible;">
-
-						<div class="profile-widget">
-							<h3>Skill Set</h3>
-
-							<h5>Python</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-							</div>
-                            
-                            <h5>C#</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-							</div>
-
-							<h5>C</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-off"></div>
-							</div>
-
-							<h5>MySQL (RDBMS)</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-							</div>
-                            
-                            <h5>NoSQL</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-							</div>
-							
-							<h5>Git</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-off"></div>
-							</div>
-							
-							<h5>REST APIs</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-							</div>
-							
-							<h5>AWS</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-							</div>
-                            
-                            <h5>Azure</h5>
-							<div class="skill-bar">
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-on"></div>
-								<div class="skill-rate-off"></div>
-							</div>
-							
-						</div>
-
-						<div class="profile-widget">
-							<h3>Social Profiles</h3>
-							<ul class="widget-social">
-								<li><a href="https://www.facebook.com/tejas.pattabhi" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
-								<li><a href="https://www.linkedin.com/pub/tejas-pattabhi/59/473/179" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="https://bitbucket.org/tejaspattabhi" target="_blank"><i class="fa fa-bitbucket"></i></a></li>
-							</ul>
-						</div>
-
-					</div><!-- .col-md-3 -->
-                    
-					<div class="col-md-6 col-sm-12 wow bounceInRight animated" style="visibility: visible;">
-						<h3>Background</h3>
-						<p>
-								I entered the field of Computer Science when I joined <strong>P. E. S. School of Engineering, Bangalore</strong> (Now called as P. E. S. I. T. Bangalore 
-                                South Campus) in 2008 to pursue my Engineering in Information Science and Technology. Upon graduation, I started my career as a Young Graduate at 
-                                <strong>Societe Generale Global Solution Center</strong>, Bangalore, India carrying out the responsibilities of a <strong>Windows Server Administrator</strong>. 
-                                This was my first opportunity to learn and understand the issues faced in real-time on Production machines. Understood the concept of Virtualization, 
-                                and helped myself to gain experienced myself with scripting.</p>
-						<p>
-								After working there for an year, I decided to go back to school. Migrated to The United States of America and started with my Master's program in the field of 
-                                Computer Science at Erik Johnsson School of Engineering, <strong>University of Texas at Dallas.</strong> I chose to pursue my M. S. in the Traditional Track, 
-                                which emphasizes on the low level computing of Operating Systems, System Design, Algorithms and Compilers. 
-                        </p>
-                        <p>     While in school, I interned at <strong>TradeStation Technologies</strong> for eight months as <strong>Software Developer Intern</strong>. Here, I got to learn about REST APIs, IIS, data management, cloud storage, 
-                                online trading and data analysis. This was my first opportunity to use the Cloud Computing giant - Amazon Web Services. Using AWS Product - EMR, I was tasked to 
-                                crunch IIS Logs to analyze request and response codes. Completed that by presenting it as a product interfaced with a UI that updates in real time. 
-						</p>
-                    </div>
-                    <div class="col-md-12 wow bounceInRight animated" style="visibility: visible;">
-						<p>
-								In my last semester of MS, I interned as a <strong>Student Volunteer from UTD</strong> at <strong>Award Solutions</strong> where I worked on <strong>OpenStack 
-                                and it's applications</strong>. This was my opportunity to understand how the opensource community works and how we can contribute to it. Developed an 
-                                application which could monitor a number of clusters/ Virtual Machines/ Tenants on a web-page. This was a part of my coursework. I completed my Master's degree in 
-                                August 2015. I have been a part (lead) of several major projects developed at UTD. Please check my <a href="https://www.bitbucket.org/tejaspattabhi">git profile</a> 
-                                for more information on my work and projects built during my time at UTD.
-						</p>
-						<p>
-								Upon graduation, I started working for <strong>Webroot</strong>, a CyberSecurity firm as a <strong>Software Engineer</strong>. Here, I got to work on identifying IPv4 
-                                and IPv6 threat IPs, understand the nature of threat and got to build a system so dynamic that identified IPs could be blocked in real time. This was an excellent 
-                                approach to avoid phishing attacks. As a team, we successfully setup honeypots for bad guys to attack, identified credible threat sources, build in-house C&C bots
-                                to act as honeypots. We were effectively able to gather 4M+ IPsI moved on to identifying threats on URLs, while maintaining and developing on IPs. This was a 
-                                lot more complex problem to solve as threats constantly evolve. Using the amazing ML models developed in-house, I got the opportunity to be a part of a team that was 
-                                responsible for web-safe crawling, classification and threat detection. Updates of classifications and threats were delivered in real time. We were able to accomplish 
-                                real time blocking of phishing attacks1 17M+ safe URL crawling per day. Identifying ~1% of those to be threats. We then designed a "Deep Crawling" technique which was 
-                                designed to dig up URLs related to the threat URLs to check if any threat content was hosted on it. We were able to achive ~88% accuracy. This application is being patented and is currently "pending" with ownership to Webroot.
-                                In February 2019, I was promoted to being a <strong>Sr. Software Engineer</strong>. 
-                        </p>
-                        <p>
-                                Since then, I've been working on multiple projects in Webroot, like Domain Score Service where we rank domains based on it's security, Cloud Security Intelligence, where we identify cloud applications' and it's organizations' security 
-                                vulnerabilities and provide that to our customers. I mainly worked on ranking/scoring these applications based on key security factors, for example - MFA, certificates, 
-                                URLs hosted, CVE, bot identification techniques. I've been a Subject Matter Expert on IPs and URLs threat data collection. Have been a mentor, guide for multiple engineers on the team.
-                                In 2020, Webroot was acquired by <strong>OpenText</strong>. Since then I've been an employee of OpenText SMB/C.
-						</p>
-						
-					</div>
-                    
-				</div><!-- .row -->
-			</div><!-- .container -->
-		</section>
-		<!-- Profile section end -->
-		
-		<!-- Callout section start -->
-		<section id="stats" class="callout">
-			<div class="container">
-				<div class="wow bounceInUp animated"><h3 style="display: inline;"><i>"</i> If you want to shine like a Sun, first burn like the Sun <i>"</i></h3> <p class="pull-right">&#8212; Dr. A P J Abdul Kalam</p></div><br /><br />
-				<div class="wow bounceInLeft animated"><h3 style="display: inline;"><i>"</i> The only place where 'success' comes before 'work' is the Dictionary <i>"</i></h3> <p class="pull-right">&#8212; Vince Lombardi</p></div><br /><br />
-			</div><!-- .container -->
-		</section>
-		<!-- Callout section end -->
-
-		<!-- Resume section start -->
-		<section id="resume" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 headline wow bounceInDown">
-						<h2>Resume</h2>
-						<p>My education and experience.</p>
-						<a href="resume/Tejas Pattabhi.pdf" target="_blank" class="btn btn-default btn-custom-2 "><i class="fa fa-cloud-download icon-before"></i> Download Resume</a>
-					</div>
-				</div><!-- .row -->
-				<div class="row resume-items">
-					<div class="col-md-3 wow bounceInLeft">
-						<h3>Experience</h3>
-					</div>
-                    
-					<div class="col-md-6 col-sm-8 resume-item wow bounceInLeft">
-						<h4>Senior Software Engineer</h4>
-							<hr class="hidden-xs">
-					</div>
-					<div class="col-md-3 col-sm-4 resume-place wow bounceInRight">
-						<h4><i class="fa fa-suitcase"></i> OpenText (previously, Webroot)</h4>
-						<p>San Diego, CA</p>
-						<i class="fa fa-calendar"></i> February 2019 - Current
-						<hr class="visible-xs">
-					</div>
-                    
-					<div class="col-md-6 col-md-offset-3 col-sm-8 resume-item wow bounceInLeft">
-						<h4>Software Engineer</h4>
-							<hr class="hidden-xs">
-					</div>
-                    
-					<div class="col-md-3 col-sm-4 resume-place wow bounceInUp">
-						<h4><i class="fa fa-suitcase"></i> Webroot Inc.</h4>
-						<p>San Diego, CA</p>
-						<i class="fa fa-calendar"></i> September 2015 - February 2019
-						<hr class="visible-xs">
-					</div>
-					<div class="col-md-6 col-md-offset-3 col-sm-8 resume-item wow bounceInLeft">
-						<h4>Student Volunteer Intern - OpenStack</h4>
-							<hr class="hidden-xs">
-					</div>
-                    
-					<div class="col-md-3 col-sm-4 resume-place wow bounceInUp">
-						<h4><i class="fa fa-suitcase"></i> Award Solutions</h4>
-						<p>Richardson, TX</p>
-						<i class="fa fa-calendar"></i> May 2015 - August 2015
-						<hr class="visible-xs">
-					</div>
-                    
-					<div class="col-md-6 col-md-offset-3 col-sm-8 resume-item wow bounceInUp">
-						<h4>Software Developer - Intern</h4>
-						<hr class="hidden-xs">
-					</div>
-					<div class="col-md-3 col-sm-4 resume-place wow bounceInRight">
-						<h4><i class="fa fa-suitcase"></i> TradeStation Technologies</h4>
-						<p>Richardson, TX</p>
-						<i class="fa fa-calendar"></i> May 2014 - December 2014
-						<hr class="visible-xs">
-					</div>
-
-					<div class="col-md-6 col-md-offset-3 col-sm-8 resume-item wow bounceInUp">
-						<h4>Young Grad, Windows Server Administrator</h4>
-						<hr class="hidden-xs">
-					</div>
-
-					<div class="col-md-3 col-sm-4 resume-place wow bounceInRight">
-						<h4><i class="fa fa-suitcase"></i> Societe Generale - Global Solution Centre</h4>
-						<p>Bangalore, KA, India</p>
-						<i class="fa fa-calendar"></i> August 2012 - August 2013
-						<hr class="visible-xs">
-					</div>
-
-				</div><!-- .row -->
-
-				<br /><br />
-
-				<div class="row resume-items">
-
-					<div class="col-md-3 wow bounceInLeft">
-						<h3>Education</h3>
-					</div>
-
-					<div class="col-md-6 col-sm-8 resume-item wow bounceInUp">
-						<h4>Masters in Computer Science</h4>
-						<hr class="hidden-xs">
-					</div>					
-                    
-					<div class="col-md-3 col-sm-4 resume-place wow bounceInRight">
-						<h4><i class="fa fa-university"></i>University of Texas at Dallas, Erik Johnsson School of Engineering</h4>
-						<i class="fa fa-calendar"></i> August 2013 - August 2015
-						<hr class="visible-xs">
-					</div>
-					<br />
-					<div class="col-md-6 col-md-offset-3 col-sm-8 resume-item wow bounceInUp">
-						<h4>Bachelor of Engineering in Information Science</h4>
-						<hr class="hidden-xs">
-					</div>
-
-					<div class="col-md-3 col-sm-4 resume-place wow bounceInRight">
-						<h4><i class="fa fa-university"></i> P. E. S. Institute of Technology, Bangalore South Campus, Visveswaraya Technological University</h4>
-						<i class="fa fa-calendar"></i> August 2008 - August 2012
-						<hr class="visible-xs">
-					</div>
-
-				</div><!-- .row -->
-
-			</div><!-- .container -->
-
-		</section>
-
-		<!-- Resume section end -->
-
-		<!-- Callout section start -->
-
-		<section class="callout">
-
-			<div class="container">
-
-				<div class="row">
-
-					<div class="col-md-3 hidden-xs wow bounceInLeft animated" style="visibility: visible;">
-						<h3>Publication</h3>
-					</div>
-
-					<div class="col-md-9 headline nomargin wow bounceInRight animated" style="visibility: visible;">
-						<h3>Implementing Delaunay Triangles and Bezier Curves to Identify Suitable Business Locations in the Presence of Obstacles</h3>
-						<h4>Authors</h4>
-						<p>Tejas Pattabhi, Arti Arya, Pradyumna N, Swati Singh, Sukanya D</p><br />
-						<h4>Abstract</h4>
-						<p>Data mining plays an important role in collecting information to make businesses more competitive in present business world. It is seen that the location of any business outlet is a major factor of its success. Establishing different business enterprises include a detail study of localities, people's income status living in those areas, and many other non-spatial factors. This paper is one such idea to suggest those locations for entrepreneurs, based on which they can decide on the where they can setup their business outlet. The proposed algorithm makes use of Delaunay triangulation for capturing spatial proximity and Bezier curves are used to model obstacles. The algorithm is implemented as Web application, which accepts the name of a place and collects data, form clusters and show the feasible locations of the service specified, considering the geographic irregularities and man-made obstructions. In this algorithm, spatial and non-spatial data related to a location are collected and the spatial clustering algorithm is initiated which works based on the obtained data. Clusters are formed based on the unique characteristics of each location. The experimental results are conducted on many different locations of India and in this paper results are shown for three places namely, Mysuru, Patna and Mumbai. The results have shown expected and exciting results.</p><br />
-						<!-- <h4>Citation</h4>
-						<p>Tejas Pattabhi, Arti Arya, Pradyumna N, Swati Singh, Sukanya D,"Implementing Delaunay Triangles and Bezier Curves to Identify Suitable Business Locations in the Presence of Obstacles", IJITCS, vol.5, no.3, pp.29-39, 2013.DOI: 10.5815/ijitcs.2013.03.04</p><br />
-                        -->
-						<h4>Link to the publication</h4>
-						<a href="http://www.mecs-press.org/ijitcs/ijitcs-v5-n3/IJITCS-V5-N3-4.pdf">http://www.mecs-press.org/ijitcs/ijitcs-v5-n3/IJITCS-V5-N3-4.pdf</a>
-					</div>
-
-				</div><!-- .row -->
-
-			</div><!-- .container -->
-
-		</section>
-
-		<!-- Callout section end -->
-
-
-		<!-- projects section start -->
-
-		<section id="services" class="section">
-
-			<div class="container">
-				<div class="row">
-
-					<div class="col-md-12 headline wow bounceInDown">
-						<h2>Projects</h2>
-						<h4>Samples of my work: <a href="https://www.bitbucket.org/tejaspattabhi">https://www.bitbucket.org/tejaspattabhi</a></h4>
-
-					</div>
-                    
-					<div class="col-md-12">
-						<h3 class="wow bounceInDown">Professional Projects</h3>
-                        <div class="row">
-							<div class="col-sm-4 wow bounceInLeft" data-wow-delay=".4s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-user-secret"></i>
-									</div>
-									<h4>OpenText, previously Webroot</h4>
-									<div class="text">
-										<p>
-										<strong>Cloud Security Intelligence and Reputation: </strong>As a key engineer in the team; responsible for designing & developing a reputation scoring system for cloud applications and its hosting organizations based on CSA properties, security features, hosting URL reputations. Enabled the application to gather data vectors dynamically. I am also the DevOps engineer responsible for hosting this on AWS. <br />
-										</p>
-									</div>
-								</div>
-							</div>
-                            <div class="col-sm-4 wow bounceInLeft" data-wow-delay=".4s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-user-secret"></i>
-									</div>
-									<h4>Webroot - IP BrightCloud Threat Intelligence</h4>
-									<div class="text">
-										<p>
-										<strong>IP Threat Analysis: </strong>As the subject matter expert, lead of this project, developed a prison system for IPs to publish a threat list. A key developer in categorizing the IPs based on its recorded bad activity of threat categories: Phishing, Botnet, Malware, Proxies, Spam. I am also the DevOps engineer responsible for hosting this on AWS.<br />
-                                        <strong>Honeypots: </strong>As a part of a team, architected, developed honeypots on cloud platforms which traps scanners, malware, injections, DoS attackers, etc. and feed to IP Threat Analysis. I am also the DevOps engineer responsible for hosting this on AWS, GCP and Azure<br />
-                                        <strong>Anonymous Proxy Identifier: </strong>As an innovation, developed a system which can identify and trap open web IPv4 proxies which pose a threat to the internet through tor network.<br />
-										</p>
-									</div>
-								</div>
-							</div>
-                            <div class="col-sm-4 wow bounceInLeft" data-wow-delay=".4s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-user-secret"></i>
-									</div>
-									<h4>Webroot - URL BrightCloud Threat Intelligence</h4>
-									<div class="text">
-										<p>
-										<strong>URL Crawling, Classification & Threat Detection: </strong>As the head of this project, developed & maintained clusters to perform safe web-crawling. Mentored engineers in the team on classification, threat detection and safe-web crawling. Hit 17M+ URL crawls a day. Identified ~1% of those as threats, classified ~87% them into predefined categories, identified site’s language; all using Webroot developed ML models. Key part of project DeepCrawl; engineered an extension to dig URLs related to a threat URL – URLs hosted on same IP of the threat, common paths, previously known, etc. Patent pending to Webroot. I am also the DevOps engineer responsible for hosting this on AWS.<br />
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-                        <div class="row">
-							<div class="col-sm-4 wow bounceInUp" data-wow-delay=".4s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-cog"></i>
-									</div>
-									<h4>Award Solutions</h4>
-									<div class="text">
-										<p>
-										<strong>Alarm Counter Web: </strong>Built an app that can run on a Linux Server VM & respond to web-hooks executed on every state transition of a VM in the Alarm Counter. Designed a web page to consolidate all tenant monitors graphically. Information gathered – Ceilometer.<br />
-										<strong>Our Work is seen here: </strong> <a href="http://cs.utdallas.edu/opensourcecourse/">http://cs.utdallas.edu/opensourcecourse/</a>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4 wow bounceInUp" data-wow-delay=".4s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-desktop"></i>
-									</div>
-									<h4>TradeStation Technologies</h4>
-									<div class="text">
-										<p>
-										<strong> IISLogAnalysis: </strong> Implemented MapReduce Algorithm to analyze IIS logs from PROD servers on a daily basis using the AWS Elastic MapReduce (EMR) & generate JSON files with information on number of requests and response codes for different intervals of time. <br />
-										<strong> D3 Web Application: </strong>Using the Data Driven Documents (D3) framework, developed web pages & hosted them on an EC2 instance which would consume JSON files and generate a graphical view of data like heat maps, scatter charts to analyze network traffic. <br />
-										<strong> TradeStation IISLogAnalysis Plugin: </strong>Constructed a plugin which makes the MapReduce algorithm to consume IIS logs (input) & store JSON (output) in an S3 bucket. It also fed the D3 Web Apps with JSON files directly from the S3 buckets. <br />
-
-										</p>
-									</div>
-								</div>
-							</div>
-                            <div class="col-sm-4 wow bounceInUp" data-wow-delay=".4s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-cog"></i>
-									</div>
-									<h4>Societe Generale Global Solution Centre</h4>
-									<div class="text">
-										<p>
-										<strong>Health Check of VMs Automation: </strong>Developed a script to extract the status of every server of Societe Generale clients on all the ESXi present two data centers.<br />
-										<strong>Server Construction, Maintenance and Decommission (Virtual): </strong>Investigated challenging cases of unreachable servers, network failures and backup issues. Participated in Disaster Recovery drills. <br />
-										<strong>HP c7000 Blade servers and asset management: </strong>Set up the iLO with the provided configuration and up-gradation of c7000 BL460c servers of HP on regular basis. Individually handled iLO and Firmware up-gradation of 706 servers.<br />
-										<strong>Virtual Asset Management: </strong>Individually installed and configured ESXi and clusters to host VMs.<br />
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-                    
-                    <div class="col-md-12">
-						<h3 class="wow bounceInDown">Academic & Personal projects</h3>
-						<div class="row">
-
-							<div class="col-sm-4 wow bounceInLeft">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-book"></i>
-									</div>
-									<h4>Dynamic Node Discovery in a Distributed Computing Environment</h4>
-									<div class="text">
-										<p>Self designed algorithm for discovering all the nodes in a distributed computing network environment. 
-										Designed in a such a way that the new nodes, failed nodes and the recovered nodes can be identified using a message complexity of O (log N). Where N is the total
-										number of nodes in the environment. Implemented this algorithm using the SCTP in C++.</p>
-									</div>
-									<p><strong>Link to Source Code: </strong><a href="https://bitbucket.org/tejaspattabhi/distributed-node-discovery-algorithm">https://bitbucket.org/tejaspattabhi/distributed-node-discovery-algorithm</a></p>
-								</div>
-							</div>
-
-							<div class="col-sm-4 wow bounceInUp">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-book"></i>
-									</div>
-									<h4>A graph based web tool to identify the important business locations in a town</h4>
-									<div class="text">
-										<p>Developed a web based tool to locate the best places for a specific type of business in any city across the globe. It works on spatial and non-spatial data mining algorithms, gathers live data from various datasets of google, wiki and some licensed 
-										dedicated governoment sources. Using the mathematical structures like Bezier Curves and Delaunay triangles, a data mining algorithm is designed to tackle this problem. This entire project was developed using PHP, JQuery and JavaScript.</p>
-									</div>
-									<p><strong>Link to the project: </strong><a href="http://www.mecs-press.org/ijitcs/ijitcs-v5-n3/v5n3-4.html">http://www.mecs-press.org/ijitcs/ijitcs-v5-n3/v5n3-4.html</a></p>
-								</div>
-							</div>
-							
-							<div class="col-sm-4 wow bounceInRight">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-book"></i>
-									</div>
-									<h4>Network Simulation and DVMRP protocol implementation</h4>
-									<div class="text">
-										<p>						
-										Simulated the working of a network in the real world where a network node could be initialized and triggered as a UNIX process. Communication between the processes (network nodes) was seen as IPC methods (network links). Implemented the Distance Vector Multicast Routing Protocol. The entire project was implemented in C
-										</p>
-									</div>
-								</div>
-								<p><strong>Link to Source Code: </strong><a href="https://bitbucket.org/tejaspattabhi/dvmrp">https://bitbucket.org/tejaspattabhi/dvmrp</a></p>
-							</div>
-
-						</div><!-- .row -->
-						<div class="row">
-
-							<div class="col-sm-4 wow bounceInRight" data-wow-delay=".2s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-book"></i>
-									</div>
-									<h4>Implementation of Roucairol & Carvalho's Mutex Algorithm in Distributed Computing</h4>
-									<div class="text">
-										<p>Implemented the Roucairol and Carvalho's Mutual Exclusion Algorithm in a distributed systems environment. Transformed the algorithm with a Key-based approach, where the nodes shared Keys instead of traditional "permissions" to obtain locks. The entire project was coded in C++.
-										</p>
-										<p><strong>Link to Source Code: </strong><a href="https://bitbucket.org/tejaspattabhi/roicairol-carvalho-mutex-algorithm">https://bitbucket.org/tejaspattabhi/roicairol-carvalho-mutex-algorithm</a></p>
-									</div>
-								</div>
-								</div>
-								
-							<div class="col-sm-4 wow bounceInDown" data-wow-delay=".4s">
-							<div class="service">
-								<div class="icon">
-									<i class="fa fa-book"></i>
-								</div>
-								<h4>Implementation of a replicated file system in a Distributed System environment using the dynamic voting protocol</h4>
-								<div class="text">
-									<p>In a distributed computing environment, maintaining a file system is challenging. This project was implemented using the Voting Protocol principle, where the file systems are updated dynamically using the lock-based-systems. This multi threaded application was developed in g++491 environment.
-									</p>
-									<p><strong>Link to Source Code: </strong><a href="https://bitbucket.org/tejaspattabhi/dynamic-voting-algorithm-in-distributed-systems/overview">https://bitbucket.org/tejaspattabhi/dynamic-voting-algorithm-in-distributed-systems/overview</a></p>
-								</div>
-							</div>
-							</div>
-						
-							<div class="col-sm-4 wow bounceInLeft" data-wow-delay=".2s">
-							<div class="service">
-								<div class="icon">
-									<i class="fa fa-book"></i>
-								</div>
-								<h4>Time Table for Schools</h4>
-								<div class="text">
-									<p>Implemented a randomized Time Table generation algorithm which would generate schedules for classes, professors and laboratories. Languages Used: PHP for server end scripting, HTML, Javascript and CSS.
-									</p>
-								</div>
-							</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4 wow bounceInRight" data-wow-delay=".2s">
-								<div class="service">
-									<div class="icon">
-										<i class="fa fa-book"></i>
-									</div>
-									<h4>Person Tracker</h4>
-									<div class="text">
-										<p>
-											Person Tracker is an application used to track the locations travelled by a user for a given calendar day. This application is developed by making use of Call Detail Record (CDR) data set, which gives us information about the location (latitude and longitude), call duration, date and time of calls received by a user with their respective user id (encrypted).
-										</p>
-										<p><strong>Link to Source Code: </strong><a href="https://bitbucket.org/tejaspattabhi/person-tracker">https://bitbucket.org/tejaspattabhi/person-tracker</a></p>
-									</div>
-								</div>
-								</div>
-								
-							<div class="col-sm-4 wow bounceInDown" data-wow-delay=".4s">
-							<div class="service">
-								<div class="icon">
-									<i class="fa fa-book"></i>
-								</div>
-								<h4>MapReduce Design and Work Samples</h4>
-								<div class="text">
-									<p>
-										Random designs and Java Programs coded to run in MapReduce Framework.
-									</p>
-									<p><strong>Link to Source Code: </strong><a href="https://bitbucket.org/tejaspattabhi/mapreduce-examples">https://bitbucket.org/tejaspattabhi/mapreduce-examples</a></p>
-								</div>
-							</div>
-							</div>
-						</div><!-- row -->
-					</div>
-				</div><!-- .row -->
-			</div><!-- .container -->
-
-		</section>
-
-		<!-- Services section end -->
-
-		<!-- Callout section start -->
-
-		<section class="callout">
-
-			<div class="container">
-
-				<div class="row">
-
-					<div class="col-md-3 hidden-xs wow bounceInLeft animated" style="visibility: visible;">
-						<h3>Current Status</h3>
-					</div>
-
-					<div class="col-md-9 headline nomargin wow bounceInDown animated" style="visibility: visible;">
-						<h3>Senior Software Engineer at <a href="http://www.opentext.com/">OpenText</a></h3>
-						<!-- <p>Starting from 14th September, 2015</p> -->
-						<a href="#contact" class="btn btn-default btn-custom-2 callout-btn"><i class="fa fa-paper-plane-o icon-before"></i> Contact me</a>
-					</div>
-
-				</div><!-- .row -->
-
-			</div><!-- .container -->
-
-		</section>
-		<!-- Callout section end -->
-		<!-- Contact section start -->
-        
-		<section id="contact" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 headline wow bounceInLeft animated" style="visibility: visible;">
-						<h2>Contact Me</h2>
-					</div>
-
-					<div class="col-md-6 wow bounceInUp animated" style="visibility: visible;">
-						<ul class="icon-list">
-							<li><i class="fa fa-fw fa-map-marker"></i>San Diego, CA</li>
-							<li><i class="fa fa-fw fa-phone"></i>+1 (469) 570 1988</li>
-							<li><i class="fa fa-fw fa-envelope-o"></i><a href="mailto:tejas.pattabhi@gmail.com">tejas.pattabhi@gmail.com</a></li>
-						</ul>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</section>
-
-		<!-- Contact section end -->
-
-		<!-- Footer start -->
-
-		<footer id="footer">
-
-			<div class="container">
-
-				<div class="row">
-
-					<div class="col-md-12">
-						<p class="copy">
-							&#169; 2021 Tejas Tovinkere Pattabhi, All Rights Reserved.
-						</p>
-					</div>
-
-				</div><!-- .row -->
-
-			</div><!-- .container -->
-
-		</footer>
-
-		<!-- Footer end -->
-
-	</div><!-- .wrapper -->
-
-	<!-- Javascript files -->
-	<!-- jQuery -->
-	<script src="assets/js/jquery-1.11.0.min.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<!-- Background slider -->
-	<script src="assets/js/jquery.backstretch.min.js"></script>
-	<!-- OwlCarousel -->
-	<script src="assets/js/owl.carousel.min.js"></script>
-	<!-- Modal for portfolio -->
-	<script src="assets/js/jquery.magnific-popup.min.js"></script>
-	<!-- Text rotator -->
-	<script src="assets/js/jquery.simple-text-rotator.min.js"></script>
-	<!-- Waypoints -->
-	<script src="assets/js/jquery.waypoints.js"></script>
-	<!-- CountTo  -->
-	<script src="assets/js/jquery.countTo.js"></script>
-	<!-- WOW - Reveal Animations When You Scroll -->
-	<script src="assets/js/wow.min.js"></script>   
-	<!-- Smooth scroll -->
-	<script src="assets/js/smoothscroll.js"></script>
-	<!-- Fitvids -->
-	<script src="assets/js/jquery.fitvids.js"></script>
-	<!-- Custom scripts -->
-	<script src="assets/js/custom.js"></script>
-
+<div class="bg-fx"></div>
+<div class="bg-grid"></div>
+<canvas id="drivefx" aria-hidden="true"></canvas>
+<div class="spotlight" id="spot"></div>
+
+<nav>
+  <div class="nav-in">
+    <div class="brand">Tejas Pattabhi<span class="dot">.</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#patents">Patents</a>
+      <a href="#contact">Contact</a>
+      <a href="#drive" class="nav-drive">Drive 🎮</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero wrap">
+  <div class="status-pill"><span class="live"></span> Staff Engineer @ Qualcomm · San Diego</div>
+  <h1>Systems and AI — <span class="grad">at scale.</span></h1>
+  <p class="role">Autonomous Driving · Applied AI · Cloud · Distributed Systems</p>
+  <p class="pitch">I build the large-scale systems that validate the software running in production vehicles, and the AI agents — models, tools, and plugins — that operate them. Over 10+ years, from securing the internet at scale to self-driving, the throughline is the same: turning hard data-and-compute problems into reliable production infrastructure.</p>
+  <div class="cta">
+    <a class="btn primary" href="resume/Tejas Pattabhi - Detailed CV.pdf" target="_blank">Résumé ↓</a>
+    <a class="btn ghost" href="#contact">Get in touch</a>
+  </div>
+  <div class="stats">
+    <div class="stat reveal"><div class="n"><span class="accent">2</span></div><div class="l">Granted U.S. patents</div></div>
+    <div class="stat reveal"><div class="n"><span class="accent">10k+</span>/day</div><div class="l">Pipeline failures auto-triaged by AI</div></div>
+    <div class="stat reveal"><div class="n"><span class="accent">17M+</span>/day</div><div class="l">Peak URLs crawled &amp; classified for threats</div></div>
+    <div class="stat reveal"><div class="n"><span class="accent">10+</span> yrs</div><div class="l">Large-scale distributed systems</div></div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="wrap reveal">
+  <span class="eyebrow">// about</span>
+  <h2 class="title">Engineer at the edge of AI &amp; autonomy</h2>
+  <div class="about-grid">
+    <div class="about">
+      <p>I'm a <strong>Staff Engineer at Qualcomm</strong>, on the critical path of the company's <strong>autonomous-driving</strong> program — the large-scale infrastructure that replays recorded real-world drives to <strong>validate the software running in production vehicles</strong>. I designed and operate that platform, and I was a key collaborator on the reprocessing pipeline behind the jointly developed <strong>Qualcomm–BMW Snapdragon Ride Pilot</strong> automated-driving system, launched in 2025.</p>
+      <p>Increasingly my work is <strong>applied AI</strong>: building and running production agents, and the models, tools, and plugins around them, that operate mission-critical infrastructure — from an agent that autonomously triages tens of thousands of pipeline failures a day to custom LLM tooling that helps engineering teams move faster.</p>
+      <p>Before Qualcomm, I spent ~6 years at <strong>Webroot / OpenText</strong> building internet-scale cybersecurity systems — distributed crawlers that safely processed <strong>17M+ URLs a day</strong>, real-time threat classification, IP threat intelligence, and multi-cloud honeypots — work that produced <strong>two granted U.S. patents</strong>. Whether it's defending the internet or validating self-driving AI, the throughline holds: secure, reliable, massively parallel data pipelines that turn raw data into trustworthy results.</p>
+      <p>I care about systems that are correct under pressure, observable, and increasingly self-operating — where AI does the repetitive diagnosis so engineers can focus on the hard problems.</p>
+    </div>
+    <div class="side-card reveal">
+      <h4>At a glance</h4>
+      <ul>
+        <li><span class="accent">▹</span><span><b>Now</b> — Staff Engineer, Qualcomm</span></li>
+        <li><span class="accent">▹</span><span><b>Focus</b> — ADAS/AD validation infra &amp; AI agents</span></li>
+        <li><span class="accent">▹</span><span><b>Patents</b> — 2 granted (US)</span></li>
+        <li><span class="accent">▹</span><span><b>Education</b> — MS CS, UT Dallas</span></li>
+        <li><span class="accent">▹</span><span><b>Based in</b> — San Diego, CA</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="wrap reveal">
+  <span class="eyebrow">// experience</span>
+  <h2 class="title">Where I've worked</h2>
+  <div class="tl">
+    <div class="tl-item reveal">
+      <div class="tl-when">Sep 2021 — Present</div>
+      <div>
+        <div class="tl-role">Staff Engineer <span>(prev. Senior Engineer)</span></div>
+        <div class="tl-co">Qualcomm · San Diego, CA</div>
+        <div class="tl-ctx">On the critical path of Qualcomm's ADAS/autonomous-driving program: I build the large-scale infrastructure that replays recorded real-world drive data at massive scale to validate automated-driving software — perception, radar, vehicle self-motion and positioning, ground-truth labeling, and automatic emergency braking.</div>
+        <ul class="tl-list">
+          <li><b>Automotive-grade reprocessing clusters.</b> Designed, built, and operate two independent on-prem Kubernetes clusters of Qualcomm's automotive silicon dedicated to bit-accurate reprocessing — so validation runs on the exact silicon the software executes on in the car, at a speed fast enough to replay drives near real time. <a href="#work">See it in What I build ↓</a></li>
+          <li><b>Reprocessing-as-a-Service platform.</b> Architected a pipeline that runs identically in cloud or on-prem: file-selection orchestration (AppSync/GraphQL + IAM), DAG dependency resolution, event-driven Argo Workflows, parallel petabyte-scale transfer, and failure classification. <a href="#work">Details ↓</a></li>
+          <li><b>Production AI triage agent &amp; applied-AI tooling.</b> As project lead, built and run an agent that autonomously triages tens of thousands of job failures a day, plus the models, custom tools, and plugins that help engineering teams move faster. <a href="#work">Details ↓</a></li>
+          <li><b>Key collaborator, Qualcomm–BMW Group program.</b> Helped deliver the reprocessing pipeline behind the jointly developed Snapdragon Ride Pilot system — publicly launched Sept. 2025, debuting in the BMW iX3.</li>
+          <li><b>Fleet-health &amp; accuracy monitoring.</b> Built a Prometheus + Flask stack tracking each accelerator's health and firmware every 30s and the Real-Time Factor of reprocessing output. <a href="#work">Details ↓</a></li>
+          <li><b>Massively parallel cloud reprocessing.</b> Re-architected the cloud pipeline onto GCP Dataflow, redesigning how work is partitioned and scheduled to raise concurrency and cut end-to-end turnaround.</li>
+          <li><b>Engineering leadership.</b> Lead and coordinate engineering across teams spanning three time zones — reviewing code and setting technical direction on a continuous-delivery cadence.</li>
+        </ul>
+        <div class="tl-meta"><span class="t">Kubernetes</span><span class="t">Argo Workflows</span><span class="t">AWS</span><span class="t">GCP Dataflow</span><span class="t">Claude Agent SDK</span><span class="t">pgvector</span><span class="t">Prometheus</span></div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-when">Sep 2015 — Sep 2021</div>
+      <div>
+        <div class="tl-role">Senior Software Engineer <span>(prev. System Software Engineer, Software Engineer)</span></div>
+        <div class="tl-co">OpenText (formerly Webroot) · San Diego, CA</div>
+        <div class="tl-ctx">Led internet-scale cybersecurity and threat-intelligence systems protecting end users across the web.</div>
+        <ul class="tl-list">
+          <li><b>Crawling &amp; threat detection at internet scale.</b> Led distributed crawling clusters that safely processed <b>17M+ URLs per day</b>, classifying threats in real time. Co-invented "DeepCrawl" — pivoting from one known-malicious link to uncover related infrastructure and grade its threat with an ML model — <b>the basis of two granted U.S. patents.</b> <a href="#work">See it in What I build ↓</a></li>
+          <li><b>IP threat analysis.</b> Subject-matter expert and lead; built a system categorizing malicious hosts by activity — phishing, botnet, malware, proxy, spam — to publish threat lists. Owned the AWS hosting and DevOps.</li>
+          <li><b>Cloud security intelligence &amp; reputation.</b> Designed a reputation-scoring system for cloud applications and their hosting organizations, gathering data vectors dynamically to surface security posture to customers.</li>
+          <li><b>Multi-cloud honeypots.</b> Architected honeypots across AWS, GCP, and Azure that captured live attacks — scanners, malware, injections, DoS — to continuously feed the threat-analysis systems.</li>
+          <li>Subject-matter expert across URL/IP threat intelligence; mentored engineers on the team.</li>
+        </ul>
+        <div class="tl-meta"><span class="t">Distributed crawling</span><span class="t">Machine learning</span><span class="t">AWS</span><span class="t">GCP</span><span class="t">Azure</span><span class="t">Threat intelligence</span></div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-when">2012 — 2015</div>
+      <div>
+        <div class="tl-role">Earlier Experience</div>
+        <div class="tl-co">Award Solutions · TradeStation · Société Générale</div>
+        <ul class="tl-list">
+          <li><b>Award Solutions</b> — Student Volunteer, OpenStack (2015). Built a webhook-driven app monitoring VM state transitions in Ceilometer; project work published open-source by UT Dallas.</li>
+          <li><b>TradeStation Technologies</b> — Software Developer Intern (2014). Built an AWS EMR application analyzing daily IIS logs, visualizing request/response volumes with D3.</li>
+          <li><b>Société Générale</b> — Windows Server Administrator, Bangalore (2012–2013). Automated production-server health checks across ESXi hosts in two data centers.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="wrap reveal">
+  <span class="eyebrow">// selected work</span>
+  <h2 class="title">What I build</h2>
+  <p class="section-sub">The systems I've designed and operate at Qualcomm, plus the patented work that preceded it.</p>
+  <div class="cards">
+    <div class="card feature reveal">
+      <span class="tag">Qualcomm · Autonomous Driving</span>
+      <h3>On-prem reprocessing platform</h3>
+      <p>Designed, built, and operate two large on-premises Kubernetes clusters of Qualcomm's <b>QCR-100</b> accelerators — the same Snapdragon Ride automotive silicon that ships in vehicles — for <b>bit-accurate</b> ADAS/AD reprocessing. Purpose-built silicon runs this <b>~100–300× faster than general-purpose compute</b>, fast enough to replay recorded drives at close to real time. Built as Reprocessing-as-a-Service: one interface running identically in cloud or on-prem, with event-driven Argo Workflows, DAG dependency resolution, and parallel petabyte-scale data transfer. This is the data that both validates today's software and trains the next generation of driving models.</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Qualcomm · Applied AI</span>
+      <h3>Production AI triage agent</h3>
+      <p>As project lead, built and run an AI system that autonomously triages <b>tens of thousands of pipeline failures/day</b>. Self-hosted embeddings + pgvector cosine-similarity suppress duplicates, so only novel failures reach a <b>Claude Agent SDK + AWS Bedrock</b> agent that diagnoses root cause and opens Jira tickets or GitHub fix-PRs — shifting engineers from investigating every failure to reviewing a diagnosed problem with a fix already proposed.</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Qualcomm · Applied AI</span>
+      <h3>Agents, models &amp; developer tooling</h3>
+      <p>Beyond triage, I build the broader applied-AI layer: <b>custom Claude skills &amp; plugins</b> and <b>MCP tool integrations</b> that wire LLMs into real engineering workflows, agentic-coding tooling (<b>Claude Code, Codex</b>), and <b>self-hosted embedding models</b> (Qwen3, ONNX int8) — choosing the right model and the right amount of autonomy for each task so teams ship faster with humans in the loop.</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Qualcomm · Cloud &amp; Scale</span>
+      <h3>Massively parallel cloud reprocessing</h3>
+      <p>Re-architected the cloud reprocessing pipeline onto <b>GCP Dataflow</b> to run at massive parallelism — redesigning how work is partitioned and scheduled to raise concurrency and cut end-to-end turnaround while improving output accuracy. Cross-account, event-driven AWS underneath: <b>ECS Fargate, SQS FIFO, EventBridge Pipes, RDS/PostgreSQL</b>, provisioned as code with AWS CDK.</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Qualcomm · Reliability</span>
+      <h3>Fleet health &amp; hardware tooling</h3>
+      <p>Prometheus-based fleet monitoring tracking each accelerator's health, firmware, and <b>Real-Time Factor</b> (how closely reprocessing matches ground truth), plus low-level IPMI/BMC power control and safe Kubernetes node lifecycle — servicing hardware without disrupting running jobs.</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Webroot / OpenText · Patented</span>
+      <h3>DeepCrawl threat detection</h3>
+      <p>Led distributed clusters crawling <b>17M+ URLs/day</b> and co-invented "DeepCrawl" — pivoting from a known malicious link to uncover related malicious infrastructure and grade its threat with an ML model. The <b>basis of two granted U.S. patents.</b></p>
+    </div>
+    <div class="card reveal">
+      <span class="tag">Webroot / OpenText · Threat Intel</span>
+      <h3>IP intelligence &amp; honeypots</h3>
+      <p>Built an IP threat-classification system categorizing malicious hosts by activity (phishing, botnet, malware, proxy, spam), a cloud-reputation scoring system, and multi-cloud honeypots (AWS, GCP, Azure) that captured live attacks to continuously feed the threat-analysis pipelines.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS -->
+<section id="focus" class="wrap reveal">
+  <span class="eyebrow">// how i work</span>
+  <h2 class="title">What I focus on</h2>
+  <div class="focus">
+    <div class="focus-item reveal"><span class="ic">⚙️</span><h4>Systems that scale</h4><p>Kubernetes-native, event-driven architectures that stay reliable from one node to petabyte-scale fleets.</p></div>
+    <div class="focus-item reveal"><span class="ic">🤖</span><h4>Applied AI, in production</h4><p>Agents, models, tools, and plugins that diagnose, remediate, and accelerate real engineering work — the right model and the right autonomy for each task, humans in the loop.</p></div>
+    <div class="focus-item reveal"><span class="ic">🎯</span><h4>Correctness under pressure</h4><p>Bit-accuracy, observability, and safe operations for systems where the output has to be trusted.</p></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="wrap reveal">
+  <span class="eyebrow">// toolkit</span>
+  <h2 class="title">Skills &amp; tools</h2>
+  <div class="skill-groups">
+    <div class="skill-col reveal">
+      <h4>Applied AI</h4>
+      <div class="chips"><span class="chip">Claude Agent SDK</span><span class="chip">AWS Bedrock</span><span class="chip">Claude Code</span><span class="chip">Codex</span><span class="chip">Custom skills &amp; plugins</span><span class="chip">MCP tools</span><span class="chip">Embeddings (Qwen3)</span><span class="chip">pgvector</span><span class="chip">Semantic dedup</span></div>
+    </div>
+    <div class="skill-col reveal">
+      <h4>Languages &amp; Cloud</h4>
+      <div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">C#</span><span class="chip">C</span><span class="chip">Bash</span><span class="chip">AWS</span><span class="chip">Google Cloud</span><span class="chip">Azure</span></div>
+    </div>
+    <div class="skill-col reveal">
+      <h4>Scale &amp; Orchestration</h4>
+      <div class="chips"><span class="chip">Kubernetes</span><span class="chip">Argo Workflows</span><span class="chip">Argo Events</span><span class="chip">GCP Dataflow</span><span class="chip">AWS CDK</span><span class="chip">Docker</span><span class="chip">Helm</span><span class="chip">Prometheus</span><span class="chip">Grafana</span></div>
+    </div>
+    <div class="skill-col reveal">
+      <h4>Databases &amp; Storage</h4>
+      <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">pgvector</span><span class="chip">MySQL</span><span class="chip">MS-SQL</span><span class="chip">Amazon S3</span><span class="chip">RDS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PATENTS -->
+<section id="patents" class="wrap reveal">
+  <span class="eyebrow">// patents &amp; research</span>
+  <h2 class="title">Patents &amp; research</h2>
+  <p class="section-sub">Named co-inventor on two granted U.S. patents, plus first-author peer-reviewed research. All links open the primary source.</p>
+  <div class="pat">
+    <a class="pat-item reveal" href="https://patents.google.com/patent/US12452259B2" target="_blank" rel="noopener">
+      <div class="no">US 12,452,259 B2 <span style="color:var(--faint)">↗</span></div>
+      <h4>Web Threat Investigation Using Advanced Web Crawling</h4>
+      <div class="meta">Granted Oct 2025 · Named co-inventor · Open Text Inc.</div>
+    </a>
+    <a class="pat-item reveal" href="https://patents.google.com/patent/US11201875B2" target="_blank" rel="noopener">
+      <div class="no">US 11,201,875 B2 <span style="color:var(--faint)">↗</span></div>
+      <h4>Web Threat Investigation Using Advanced Web Crawling</h4>
+      <div class="meta">Granted Dec 2021 · Named co-inventor · Open Text Inc.</div>
+    </a>
+  </div>
+  <div class="pub reveal">
+    <b>Publication (first author)</b> — "Implementing Delaunay Triangles and Bezier Curves to Identify Suitable Business Locations in the Presence of Obstacles," <em>Int'l Journal of Information Technology &amp; Computer Science</em>, vol. 5 no. 3, 2013.
+    &nbsp;<a class="accent" href="http://www.mecs-press.org/ijitcs/ijitcs-v5-n3/IJITCS-V5-N3-4.pdf" target="_blank" rel="noopener">Read the paper ↗</a>
+  </div>
+</section>
+
+<!-- LANE KEEPER (fun) -->
+<section id="drive" class="wrap reveal">
+  <span class="eyebrow">// off the clock</span>
+  <h2 class="title">Keep it in the lane</h2>
+  <p class="section-sub">I spend my days validating lane-keeping software. Here's the keeps-you-honest version — steer to stay on the road, dodge the markers, and make it to the space station at the end. A rocket's waiting. No cloud required.</p>
+  <div class="game-shell reveal">
+    <div class="game-stage">
+      <canvas id="lane"></canvas>
+      <div class="game-overlay" id="gameOverlay">
+        <h4 id="ovTitle">Road to the launch pad</h4>
+        <p id="ovText">Steer to dodge the markers and stay on the road. Reach the space station at the end — a rocket's waiting to take off.</p>
+        <div class="game-modes" id="gameModes" role="group" aria-label="Difficulty">
+          <button class="mode-btn" data-mode="easy">Easy</button>
+          <button class="mode-btn is-on" data-mode="medium">Medium</button>
+          <button class="mode-btn" data-mode="hard">Take the challenge</button>
+        </div>
+        <button class="btn primary" id="ovBtn" style="justify-content:center">▶ Start driving</button>
+      </div>
+    </div>
+    <div class="game-side">
+      <div class="game-hud">
+        <div class="hud-box"><div class="k">to station</div><div class="v"><span id="hudScore">100</span><span class="u"> %</span></div></div>
+        <div class="hud-box"><div class="k">best time</div><div class="v"><span id="hudBest">—</span></div></div>
+      </div>
+      <div class="game-keys">
+        <div><kbd>←</kbd> <kbd>→</kbd> &nbsp;or&nbsp; <kbd>A</kbd> <kbd>D</kbd> &nbsp;to steer</div>
+        <div>on mobile: tap the left / right half</div>
+        <div><kbd>P</kbd> pause &nbsp;·&nbsp; <kbd>R</kbd> restart</div>
+      </div>
+      <p class="game-note">Runs entirely in your browser — no data leaves the page. Best score is remembered on this device only.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="wrap reveal">
+  <span class="eyebrow">// contact</span>
+  <h2 class="title">Let's talk</h2>
+  <p class="section-sub">Open to conversations on autonomous-driving infrastructure, large-scale AI systems, and hard engineering problems. Reach out directly.</p>
+  <div class="contact-links reveal">
+    <div class="contact-row">
+      <a href="mailto:tejas.pattabhi@gmail.com"><span class="k">✉</span> tejas.pattabhi@gmail.com</a>
+      <button type="button" class="copy-btn" id="copyEmail" data-email="tejas.pattabhi@gmail.com" aria-label="Copy email address">Copy</button>
+    </div>
+    <a href="https://www.linkedin.com/in/tejas-pattabhi/" target="_blank" rel="noopener"><span class="k">in</span> linkedin.com/in/tejas-pattabhi</a>
+    <a href="https://github.com/tpattabhi" target="_blank" rel="noopener"><span class="k">&lt;/&gt;</span> github.com/tpattabhi</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span>© <span id="year">2026</span> Tejas Tovinkere Pattabhi</span>
+    <span class="mono" style="color:var(--faint)">Built from scratch · no frameworks</span>
+  </div>
+</footer>
+
+<script>
+// footer year — auto-updates, no yearly edit needed
+document.getElementById('year').textContent=new Date().getFullYear();
+
+// copy-email button — plain text to clipboard, with a fallback for non-secure contexts
+(function(){
+  const btn=document.getElementById('copyEmail'); if(!btn) return;
+  btn.addEventListener('click',async()=>{
+    const email=btn.dataset.email;
+    let ok=false;
+    try{ await navigator.clipboard.writeText(email); ok=true; }
+    catch(e){
+      try{ const ta=document.createElement('textarea'); ta.value=email; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); ok=document.execCommand('copy'); document.body.removeChild(ta); }catch(e2){ ok=false; }
+    }
+    btn.textContent=ok?'Copied ✓':'Copy failed';
+    btn.classList.toggle('copied',ok);
+    clearTimeout(btn._t); btn._t=setTimeout(()=>{ btn.textContent='Copy'; btn.classList.remove('copied'); },1800);
+  });
+})();
+
+// scroll reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// cursor spotlight (desktop only)
+const spot=document.getElementById('spot');
+if(matchMedia('(pointer:fine)').matches){
+  addEventListener('mousemove',e=>{spot.style.opacity='1';spot.style.left=e.clientX+'px';spot.style.top=e.clientY+'px'});
+  addEventListener('mouseleave',()=>spot.style.opacity='0');
+}
+
+// ===== scroll-reactive self-driving backdrop =====
+(function(){
+  const cv=document.getElementById('drivefx'); if(!cv) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const ctx=cv.getContext('2d');
+  const CSS=getComputedStyle(document.documentElement);
+  const A1=CSS.getPropertyValue('--accent').trim()||'#5aa2ff';
+  const A2=CSS.getPropertyValue('--accent-2').trim()||'#7bd0c1';
+  let W,H,dpr;
+  function resize(){ dpr=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; cv.style.width=W+'px'; cv.style.height=H+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  resize(); addEventListener('resize',resize,{passive:true});
+
+  let travel=0;            // distance travelled (drives dash motion)
+  let curve=0, curveT=0, segT=0;
+  let lastScroll=scrollY, scrollVel=0, baseSpeed=26;
+  addEventListener('scroll',()=>{ const dy=scrollY-lastScroll; lastScroll=scrollY; scrollVel+=dy; },{passive:true});
+
+  function centerAt(t){ return curve*(t*t); }
+  function proj(t){ const horizon=H*0.42; const y=H*0.96-(H*0.96-horizon)*t; const scale=1-t*0.8; return {y,scale}; }
+
+  let last=0;
+  function frame(ts){
+    if(!last) last=ts; let dt=Math.min((ts-last)/1000,0.05); last=ts;
+    // speed = gentle idle + scroll influence (decays)
+    const spd=baseSpeed + Math.min(Math.abs(scrollVel),60)*3.2;
+    scrollVel*=0.90;
+    travel += spd*dt;
+    // meandering curve, nudged by scroll direction
+    segT-=dt; if(segT<=0){ curveT=(Math.random()*2-1)*0.5; segT=2.2+Math.random()*2.2; }
+    curve += (curveT - curve)*Math.min(dt*0.7,1) + (scrollVel*0.00006);
+    curve=Math.max(-0.7,Math.min(0.7,curve));
+
+    ctx.clearRect(0,0,W,H);
+    const cx0=W/2, steps=26, roadW=0.5;
+    // road surface
+    ctx.beginPath();
+    for(let i=0;i<=steps;i++){ const t=i/steps, p=proj(t), c=cx0+centerAt(t)*W*0.5, w=(roadW*W*0.5)*p.scale; ctx.lineTo(c-w,p.y); }
+    for(let i=steps;i>=0;i--){ const t=i/steps, p=proj(t), c=cx0+centerAt(t)*W*0.5, w=(roadW*W*0.5)*p.scale; ctx.lineTo(c+w,p.y); }
+    ctx.closePath();
+    const g=ctx.createLinearGradient(0,proj(1).y,0,proj(0).y);
+    g.addColorStop(0,'rgba(90,162,255,0.05)'); g.addColorStop(1,'rgba(90,162,255,0.14)');
+    ctx.fillStyle=g; ctx.fill();
+    // edge lines
+    for(const side of [-1,1]){ ctx.beginPath(); for(let i=0;i<=steps;i++){ const t=i/steps, p=proj(t), c=cx0+centerAt(t)*W*0.5, w=(roadW*W*0.5)*p.scale; const x=c+side*w; if(i===0)ctx.moveTo(x,p.y); else ctx.lineTo(x,p.y); } ctx.strokeStyle='rgba(123,208,193,.5)'; ctx.lineWidth=1.4; ctx.stroke(); }
+    // flowing center dashes
+    for(let i=0;i<steps;i++){ const t=i/steps; const phase=Math.floor(travel*0.6)+i; if(phase%2!==0) continue; const p=proj(t), p2=proj((i+1)/steps); const c=cx0+centerAt(t)*W*0.5, c2=cx0+centerAt((i+1)/steps)*W*0.5; ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=Math.max(1,2.6*p.scale); ctx.beginPath(); ctx.moveTo(c,p.y); ctx.lineTo(c2,p2.y); ctx.stroke(); }
+    // drifting perception points (like tracked objects), flowing toward viewer
+    for(let k=0;k<10;k++){ let t=1-(((travel*0.05)+k/10)%1); const p=proj(t); const side=(k%2?1:-1)*(0.28+ (k%3)*0.12); const x=cx0+(centerAt(t)*2.0+side)*W*0.5; const r=Math.max(1,3*p.scale); ctx.fillStyle=k%3? A1 : A2; ctx.globalAlpha=0.25+0.5*(1-t); ctx.beginPath(); ctx.arc(x,p.y,r,0,7); ctx.fill(); }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// ===== lane-keeper mini-game (pure canvas, no deps) =====
+(function(){
+  const cv=document.getElementById('lane'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const stage=cv.parentElement, overlay=document.getElementById('gameOverlay');
+  const ovTitle=document.getElementById('ovTitle'), ovText=document.getElementById('ovText'), ovBtn=document.getElementById('ovBtn');
+  const hudScore=document.getElementById('hudScore'), hudBest=document.getElementById('hudBest');
+  const CSS=getComputedStyle(document.documentElement);
+  const ACCENT=CSS.getPropertyValue('--accent').trim()||'#5aa2ff';
+  const ACCENT2=CSS.getPropertyValue('--accent-2').trim()||'#7bd0c1';
+  const MUTED=CSS.getPropertyValue('--faint').trim()||'#697790';
+
+  let W=0,H=0,dpr=1;
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    W=stage.clientWidth; H=stage.clientHeight;
+    cv.width=W*dpr; cv.height=H*dpr; cv.style.width=W+'px'; cv.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  const ro=new ResizeObserver(resize); ro.observe(stage); resize();
+
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const bestKey=(m)=>'lk_best_'+m;
+  function showBest(){ const b=localStorage.getItem(bestKey(mode)); hudBest.textContent=b?(b+'s'):'—'; }
+
+  let state='idle'; // idle | running | paused | arriving | won | over
+  // difficulty presets: target = journey length (m); gapMin/gapRnd = seconds between
+  // markers (lower = more obstacles); v0/vk = base + ramp speed; wander = road curviness.
+  const MODES={
+    easy:  {label:'Easy',              target:800,  gapMin:1.5, gapRnd:0.9, v0:130, vk:90,  wander:0.28},
+    medium:{label:'Medium',            target:1100, gapMin:1.0, gapRnd:0.7, v0:150, vk:140, wander:0.4},
+    hard:  {label:'Take the challenge',target:1600, gapMin:0.8, gapRnd:0.55,v0:170, vk:170, wander:0.5}
+  };
+  let mode='medium', M=MODES[mode];
+  let TARGET=M.target;
+  let carX, dist, elapsed, speed, curve, curveTarget, roadW, cones, spawnGap, keyL, keyR, lastT;
+  let winT=0; // animation clock for arrival/launch scene
+  let curveSeg=0;
+
+  function reset(){
+    M=MODES[mode]; TARGET=M.target;
+    carX=0; dist=0; elapsed=0; speed=M.v0; curve=0; curveTarget=0; roadW=0.6;
+    cones=[]; spawnGap=1.3; curveSeg=0; keyL=keyR=false; lastT=0; winT=0;
+  }
+  function start(){ reset(); state='running'; overlay.classList.add('hidden'); lastT=0; requestAnimationFrame(loop); }
+
+  function endLose(reason){
+    state='over';
+    const pct=Math.round(dist/TARGET*100);
+    const msgs={
+      offroad:["Off the road.","You drifted off the tarmac at "+pct+"% of the way to the station. Ease the steering and try again."],
+      hit:["Clipped a marker.","A cone caught you at "+pct+"% — the station's rocket won't wait forever. Give it another run."]
+    };
+    const [t,b]=msgs[reason]||msgs.offroad;
+    ovTitle.textContent=t; ovText.textContent=b; ovBtn.textContent='↻ Try again';
+    overlay.classList.remove('hidden');
+  }
+  let wonNewBest=false;
+  function beginWin(){
+    state='arriving'; winT=0;
+    const prev=+(localStorage.getItem(bestKey(mode))||0);
+    wonNewBest=(!prev || elapsed<prev);
+    if(wonNewBest){ localStorage.setItem(bestKey(mode),elapsed.toFixed(1)); showBest(); }
+    requestAnimationFrame(loop);
+  }
+  function showWinCard(){
+    state='won';
+    const secs=elapsed.toFixed(1);
+    const best=localStorage.getItem(bestKey(mode));
+    ovTitle.textContent='🚀 Liftoff — congratulations!';
+    ovText.textContent='You reached the station ('+M.label+') in '+secs+'s and boarded the rocket'+(wonNewBest?' — new best!':'. Best: '+best+'s')+'. Thanks for playing — now scroll back up and let’s talk.';
+    ovBtn.textContent='↻ Drive it again';
+    overlay.classList.remove('hidden');
+  }
+
+  // road geometry: center offset at a given depth 0..1
+  function centerAt(t){ return curve*(t*t); }
+  // road half-width (in normalized −1..1 space) at the car's depth
+  const CAR_T=0.08;
+  function roadHalfAt(t){ return roadW; }
+
+  function loop(ts){
+    if(!lastT) lastT=ts;
+    let dt=Math.min((ts-lastT)/1000,0.05); lastT=ts;
+
+    if(state==='arriving'){ winT+=dt; drawWin(); if(winT>3.4){ showWinCard(); return; } requestAnimationFrame(loop); return; }
+    if(state!=='running'){ return; }
+
+    elapsed+=dt;
+    // difficulty ramp with progress (mode-driven)
+    const prog=dist/TARGET;
+    speed=M.v0+prog*M.vk;
+    dist+=speed*dt/8;
+
+    // reached the station?
+    if(dist>=TARGET){ dist=TARGET; beginWin(); return; }
+
+    // meander the road (mode-driven curviness; straightens near the station)
+    curveSeg-=dt;
+    if(curveSeg<=0){ curveTarget=(prog>0.9?0:(Math.random()*2-1)*M.wander); curveSeg=1.6+Math.random()*1.8; }
+    curve+=(curveTarget-curve)*Math.min(dt*1.2,1);
+
+    // steering (car moves relative to road center)
+    const steer=(keyR?1:0)-(keyL?1:0);
+    carX+=steer*dt*1.25;
+    const roadCenter=centerAt(CAR_T)*2.0;
+    carX=Math.max(roadCenter-1.2,Math.min(roadCenter+1.2,carX));
+
+    // spawn markers — AIMED at the player's current lane so you MUST steer around them,
+    // but always leaving a clear gap to one side (dodgeable, never a dead end).
+    spawnGap-=dt;
+    if(prog<0.85 && spawnGap<=0){
+      spawnGap=M.gapMin+Math.random()*M.gapRnd;      // spacing = difficulty
+      // place the cone near where the car sits now; nudge toward road center so the
+      // escape gap stays on the road, not off the edge.
+      let target=carX*0.7 + roadCenter*0.3 + (Math.random()*2-1)*0.08;
+      target=Math.max(roadCenter-0.55, Math.min(roadCenter+0.55, target));
+      cones.push({z:1, x:target});
+    }
+    const zspeed=speed/1100;
+    for(const c of cones) c.z-=dt*zspeed;
+    cones=cones.filter(c=>c.z>-0.05);
+
+    // off-road check at the car's depth — matches the drawn road edges
+    const rel=carX-roadCenter;
+    if(Math.abs(rel)>roadHalfAt(CAR_T)){ return endLose('offroad'); }
+    // collision — hitbox tuned to the drawn car+cone widths (fair, not invisible)
+    for(const c of cones){
+      if(c.z<CAR_T+0.05 && c.z>CAR_T-0.06){
+        const cx=c.x+centerAt(c.z)*2.0;
+        if(Math.abs(cx-carX)<0.16){ return endLose('hit'); }
+      }
+    }
+
+    draw();
+    hudScore.textContent=Math.max(0,Math.round((1-prog)*100));
+    requestAnimationFrame(loop);
+  }
+
+  function proj(t){
+    const horizon=H*0.16;
+    const y=H-(H-horizon)*t;
+    const scale=1-t*0.82;
+    return {y, scale};
+  }
+  function drawRoad(showStation){
+    ctx.clearRect(0,0,W,H);
+    const hy=proj(1).y;
+    let g=ctx.createLinearGradient(0,hy-40,0,hy+10);
+    g.addColorStop(0,'rgba(90,162,255,0.10)'); g.addColorStop(1,'transparent');
+    ctx.fillStyle=g; ctx.fillRect(0,hy-40,W,50);
+
+    const steps=24; const cx0=W/2;
+    ctx.beginPath();
+    for(let i=0;i<=steps;i++){ const t=i/steps; const p=proj(t); const c=cx0+centerAt(t)*W*0.5; const w=(roadW*W*0.5)*p.scale; ctx.lineTo(c-w,p.y); }
+    for(let i=steps;i>=0;i--){ const t=i/steps; const p=proj(t); const c=cx0+centerAt(t)*W*0.5; const w=(roadW*W*0.5)*p.scale; ctx.lineTo(c+w,p.y); }
+    ctx.closePath();
+    ctx.fillStyle='#0d1420'; ctx.fill();
+    ctx.strokeStyle='rgba(90,162,255,.35)'; ctx.lineWidth=1.5; ctx.stroke();
+
+    for(let i=0;i<steps;i++){ const t=i/steps; if(((Math.floor(dist/6)+i)%2)!==0) continue; const p=proj(t),p2=proj((i+1)/steps); const c=cx0+centerAt(t)*W*0.5, c2=cx0+centerAt((i+1)/steps)*W*0.5; ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=Math.max(1,3*p.scale); ctx.beginPath(); ctx.moveTo(c,p.y); ctx.lineTo(c2,p2.y); ctx.stroke(); }
+
+    if(showStation) drawStation(cx0);
+  }
+  function drawCar(cx0){
+    const pc=proj(CAR_T); const cxCar=cx0+carX*W*0.5; const cw=Math.max(22,W*0.055), ch=cw*1.5;
+    ctx.fillStyle=ACCENT; roundRect(cxCar-cw/2,pc.y-ch,cw,ch,6); ctx.fill();
+    ctx.fillStyle='rgba(5,7,13,.55)'; roundRect(cxCar-cw/2+4,pc.y-ch+6,cw-8,ch*0.35,3); ctx.fill();
+    return {cxCar,cw,ch,y:pc.y};
+  }
+  function draw(){
+    const near=dist/TARGET>0.72;  // station grows in on approach
+    drawRoad(near);
+    const cx0=W/2;
+    for(const c of cones){ if(c.z<=0||c.z>1) continue; const p=proj(c.z); const cxp=cx0+(c.x+centerAt(c.z)*2.0)*W*0.5; const s=Math.max(3,16*p.scale); ctx.fillStyle=ACCENT2; ctx.beginPath(); ctx.moveTo(cxp,p.y-s); ctx.lineTo(cxp-s*0.6,p.y); ctx.lineTo(cxp+s*0.6,p.y); ctx.closePath(); ctx.fill(); }
+    drawCar(cx0);
+  }
+  // space station + gantry + rocket sits on the horizon, grows as you approach
+  function drawStation(cx0){
+    const p=proj(1); const cy=p.y; const grow=Math.min(1,(dist/TARGET-0.72)/0.28);
+    if(grow<=0) return;
+    const sc=grow;
+    ctx.save();
+    ctx.globalAlpha=0.55+0.45*sc;
+    // launch pad platform
+    const pw=W*0.26*sc, px=cx0-pw/2, py=cy+6;
+    ctx.fillStyle='#16233a'; roundRect(px,py-8*sc,pw,10*sc,3); ctx.fill();
+    // gantry tower
+    ctx.strokeStyle=ACCENT; ctx.lineWidth=Math.max(1,2*sc);
+    const gx=cx0-pw*0.28, gh=70*sc;
+    ctx.strokeRect(gx-3*sc,py-gh,6*sc,gh);
+    // rocket
+    const rx=cx0+pw*0.05, rw=14*sc, rh=64*sc, ry=py-rh;
+    let rg=ctx.createLinearGradient(0,ry,0,ry+rh); rg.addColorStop(0,'#eaf0f8'); rg.addColorStop(1,'#9fb4d6');
+    ctx.fillStyle=rg;
+    ctx.beginPath(); ctx.moveTo(rx,ry); ctx.lineTo(rx+rw/2,ry+rh*0.28); ctx.lineTo(rx+rw/2,ry+rh); ctx.lineTo(rx-rw/2,ry+rh); ctx.lineTo(rx-rw/2,ry+rh*0.28); ctx.closePath(); ctx.fill();
+    ctx.fillStyle=ACCENT; ctx.beginPath(); ctx.moveTo(rx-rw/2,ry+rh); ctx.lineTo(rx-rw,ry+rh+8*sc); ctx.lineTo(rx-rw/2,ry+rh-6*sc); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(rx+rw/2,ry+rh); ctx.lineTo(rx+rw,ry+rh+8*sc); ctx.lineTo(rx+rw/2,ry+rh-6*sc); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    return {rx,ry,rw,rh,sc,py};
+  }
+  // arrival → board → launch animation.
+  // timeline: 0–1.2s car parked at pad, 1.2–2.0s boarding (car fades),
+  // 2.0s+ rocket lifts off from padY up and off the top of the canvas.
+  function drawWin(){
+    // dark space backdrop with a soft starfield (deterministic so it doesn't flicker)
+    ctx.clearRect(0,0,W,H);
+    let g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#070b16'); g.addColorStop(1,'#0d1420');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    for(let i=0;i<60;i++){ const sx=((i*97)%W); const sy=((i*53)%H); const tw=0.3+0.5*Math.abs(Math.sin(i+winT*2)); ctx.fillStyle='rgba(234,240,248,'+tw*0.6+')'; ctx.fillRect(sx, sy, 1.5, 1.5); }
+
+    const cx0=W/2;
+    const padY=H*0.82;
+    // launch pad + gantry
+    ctx.fillStyle='#16233a'; const pw=W*0.42; roundRect(cx0-pw/2,padY,pw,14,4); ctx.fill();
+    ctx.strokeStyle='rgba(90,162,255,.5)'; ctx.lineWidth=2; const gx=cx0-pw*0.4; ctx.strokeRect(gx-3,padY-90,6,90);
+
+    const launch=Math.max(0,winT-2.0);
+    const lift=launch>0 ? (launch*launch*420) : 0;   // accelerating climb
+    const rw=Math.max(24,W*0.05), rh=rw*4.2;
+    const rx=cx0, ry=padY-rh-lift;
+
+    // flame + exhaust on launch (drawn under the rocket)
+    if(launch>0){
+      for(let i=0;i<12;i++){ const fs=1-i/12; ctx.fillStyle=i%2?'rgba(255,190,77,'+(0.85*fs)+')':'rgba(255,110,55,'+(0.75*fs)+')'; const fw=rw*(0.5+0.9*fs); const fy=ry+rh+i*rw*0.42; ctx.beginPath(); ctx.moveTo(rx-fw/2,fy); ctx.lineTo(rx,fy+rw*(0.9+((i*7)%5)/6)); ctx.lineTo(rx+fw/2,fy); ctx.closePath(); ctx.fill(); }
+      ctx.fillStyle='rgba(150,170,200,.18)'; ctx.beginPath(); ctx.arc(cx0,padY+8,pw*0.4*Math.min(1,launch),0,7); ctx.fill();
+    }
+
+    // rocket body
+    let rg=ctx.createLinearGradient(0,ry,0,ry+rh); rg.addColorStop(0,'#eef3fb'); rg.addColorStop(1,'#9fb4d6');
+    ctx.fillStyle=rg;
+    ctx.beginPath(); ctx.moveTo(rx,ry); ctx.lineTo(rx+rw/2,ry+rh*0.26); ctx.lineTo(rx+rw/2,ry+rh); ctx.lineTo(rx-rw/2,ry+rh); ctx.lineTo(rx-rw/2,ry+rh*0.26); ctx.closePath(); ctx.fill();
+    // window + fins
+    ctx.fillStyle=ACCENT; ctx.beginPath(); ctx.arc(rx,ry+rh*0.42,rw*0.17,0,7); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(rx-rw/2,ry+rh); ctx.lineTo(rx-rw,ry+rh+rw*0.55); ctx.lineTo(rx-rw/2,ry+rh-rw*0.4); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(rx+rw/2,ry+rh); ctx.lineTo(rx+rw,ry+rh+rw*0.55); ctx.lineTo(rx+rw/2,ry+rh-rw*0.4); ctx.closePath(); ctx.fill();
+
+    // the car that drove here, parked at the pad, fading as it "boards"
+    if(winT<2.0){ const carA=winT<1.2?1:(1-(winT-1.2)/0.8); ctx.globalAlpha=Math.max(0,carA); const cw=Math.max(22,W*0.055),ch=cw*1.5; ctx.fillStyle=ACCENT; roundRect(cx0+pw*0.28-cw/2,padY-ch,cw,ch,6); ctx.fill(); ctx.globalAlpha=1; }
+  }
+  function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+
+  // idle preview frame
+  function idleDraw(){ if(state==='idle'){ reset(); draw(); } }
+  idleDraw();
+  showBest();
+
+  // difficulty mode selection
+  const modeWrap=document.getElementById('gameModes');
+  modeWrap.addEventListener('click',(e)=>{
+    const b=e.target.closest('.mode-btn'); if(!b) return;
+    mode=b.dataset.mode;
+    modeWrap.querySelectorAll('.mode-btn').forEach(x=>x.classList.toggle('is-on',x===b));
+    showBest();
+    if(state==='idle'){ reset(); draw(); }   // refresh preview for the new mode
+  });
+
+  // controls
+  function resume(){ state='running'; overlay.classList.add('hidden'); lastT=0; requestAnimationFrame(loop); }
+  ovBtn.addEventListener('click',()=>{
+    if(reduce){ ovText.textContent='Reduced-motion is on, so the drive is disabled — but the rest of the site works great.'; return; }
+    if(state==='paused') resume(); else start();
+  });
+  function down(e){ const k=e.key.toLowerCase(); if(k==='arrowleft'||k==='a'){keyL=true;} else if(k==='arrowright'||k==='d'){keyR=true;} else return; e.preventDefault(); }
+  function up(e){ const k=e.key.toLowerCase(); if(k==='arrowleft'||k==='a')keyL=false; else if(k==='arrowright'||k==='d')keyR=false; }
+  addEventListener('keydown',(e)=>{ const k=e.key.toLowerCase();
+    if(k==='p'&&state==='running'){ pause(); return; }
+    if(k==='r'&&(state==='running'||state==='paused'||state==='over'||state==='won')){ start(); return; }
+    if(state==='running') down(e);
+  });
+  addEventListener('keyup',up);
+  function pause(){ state='paused'; ovTitle.textContent='Paused'; ovText.textContent='Press resume to keep going.'; ovBtn.textContent='▶ Resume'; overlay.classList.remove('hidden'); }
+
+  // touch: tap left/right half of the stage
+  function touchAt(x){ const mid=stage.getBoundingClientRect().left+W/2; keyL=x<mid; keyR=x>=mid; }
+  stage.addEventListener('pointerdown',e=>{ if(state==='running'){ touchAt(e.clientX); } });
+  stage.addEventListener('pointermove',e=>{ if(state==='running'&&e.pressure>0){ touchAt(e.clientX); } });
+  stage.addEventListener('pointerup',()=>{ keyL=keyR=false; });
+  stage.addEventListener('pointercancel',()=>{ keyL=keyR=false; });
+
+  // pause automatically if scrolled away or tab hidden
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden&&state==='running') pause(); });
+})();
+</script>
 </body>
 </html>
