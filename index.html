@@ -198,6 +198,11 @@ nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(14px); background:r
 .contact-links a{display:flex; align-items:center; gap:13px; background:var(--surface); border:1px solid var(--line); padding:16px 20px; border-radius:11px; font-size:14.5px; color:var(--muted); transition:all .2s}
 .contact-links a:hover{border-color:var(--accent); color:var(--text); transform:translateX(4px)}
 .contact-links a .k{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:13px; min-width:22px}
+.contact-row{display:flex; align-items:stretch; gap:9px}
+.contact-row a{flex:1}
+.copy-btn{flex:none; background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:0 16px; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.5px; cursor:pointer; transition:all .2s}
+.copy-btn:hover{border-color:var(--accent); color:var(--text)}
+.copy-btn.copied{border-color:var(--accent-2); color:var(--accent-2)}
 
 /* footer */
 footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); font-size:13.5px}
@@ -218,12 +223,12 @@ footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); fon
   <div class="nav-in">
     <div class="brand">Tejas Pattabhi<span class="dot">.</span></div>
     <div class="nav-links">
-      <a href="#drive" class="nav-drive">Drive 🎮</a>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#work">Work</a>
       <a href="#patents">Patents</a>
       <a href="#contact">Contact</a>
+      <a href="#drive" class="nav-drive">Drive 🎮</a>
     </div>
   </div>
 </nav>
@@ -240,8 +245,8 @@ footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); fon
   </div>
   <div class="stats">
     <div class="stat reveal"><div class="n"><span class="accent">2</span></div><div class="l">Granted U.S. patents</div></div>
-    <div class="stat reveal"><div class="n"><span class="accent">17M+</span>/day</div><div class="l">URLs secured at internet scale</div></div>
     <div class="stat reveal"><div class="n"><span class="accent">10k+</span>/day</div><div class="l">Pipeline failures auto-triaged by AI</div></div>
+    <div class="stat reveal"><div class="n"><span class="accent">17M+</span>/day</div><div class="l">Peak URLs crawled &amp; classified for threats</div></div>
     <div class="stat reveal"><div class="n"><span class="accent">10+</span> yrs</div><div class="l">Large-scale distributed systems</div></div>
   </div>
 </header>
@@ -466,7 +471,10 @@ footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); fon
   <h2 class="title">Let's talk</h2>
   <p class="section-sub">Open to conversations on autonomous-driving infrastructure, large-scale AI systems, and hard engineering problems. Reach out directly.</p>
   <div class="contact-links reveal">
-    <a href="mailto:tejas.pattabhi@gmail.com"><span class="k">✉</span> tejas.pattabhi@gmail.com</a>
+    <div class="contact-row">
+      <a href="mailto:tejas.pattabhi@gmail.com"><span class="k">✉</span> tejas.pattabhi@gmail.com</a>
+      <button type="button" class="copy-btn" id="copyEmail" data-email="tejas.pattabhi@gmail.com" aria-label="Copy email address">Copy</button>
+    </div>
     <a href="https://www.linkedin.com/in/tejas-pattabhi/" target="_blank" rel="noopener"><span class="k">in</span> linkedin.com/in/tejas-pattabhi</a>
     <a href="https://github.com/tpattabhi" target="_blank" rel="noopener"><span class="k">&lt;/&gt;</span> github.com/tpattabhi</a>
   </div>
@@ -482,6 +490,22 @@ footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); fon
 <script>
 // footer year — auto-updates, no yearly edit needed
 document.getElementById('year').textContent=new Date().getFullYear();
+
+// copy-email button — plain text to clipboard, with a fallback for non-secure contexts
+(function(){
+  const btn=document.getElementById('copyEmail'); if(!btn) return;
+  btn.addEventListener('click',async()=>{
+    const email=btn.dataset.email;
+    let ok=false;
+    try{ await navigator.clipboard.writeText(email); ok=true; }
+    catch(e){
+      try{ const ta=document.createElement('textarea'); ta.value=email; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); ok=document.execCommand('copy'); document.body.removeChild(ta); }catch(e2){ ok=false; }
+    }
+    btn.textContent=ok?'Copied ✓':'Copy failed';
+    btn.classList.toggle('copied',ok);
+    clearTimeout(btn._t); btn._t=setTimeout(()=>{ btn.textContent='Copy'; btn.classList.remove('copied'); },1800);
+  });
+})();
 
 // scroll reveal
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
