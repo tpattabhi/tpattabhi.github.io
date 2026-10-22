@@ -292,7 +292,7 @@ footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); fon
           <li><b>Reprocessing-as-a-Service platform.</b> Architected a pipeline that runs identically in cloud or on-prem: file-selection orchestration (AppSync/GraphQL + IAM), DAG dependency resolution, event-driven Argo Workflows, parallel petabyte-scale transfer, and failure classification. <a href="#work">Details ↓</a></li>
           <li><b>Production AI triage agent &amp; applied-AI tooling.</b> As project lead, built and run an agent that autonomously triages tens of thousands of job failures a day, plus the models, custom tools, and plugins that help engineering teams move faster. <a href="#work">Details ↓</a></li>
           <li><b>Key collaborator, Qualcomm–BMW Group program.</b> Helped deliver the reprocessing pipeline behind the jointly developed Snapdragon Ride Pilot system — publicly launched Sept. 2025, debuting in the BMW iX3.</li>
-          <li><b>Fleet-health &amp; accuracy monitoring.</b> Built a Prometheus + Flask stack tracking each accelerator's health and firmware every 30s and the Real-Time Factor of reprocessing output. <a href="#work">Details ↓</a></li>
+          <li><b>Fleet-health &amp; throughput monitoring.</b> Built a Prometheus + Flask stack tracking each accelerator's health and firmware every 30s and the Real-Time Factor of reprocessing output. <a href="#work">Details ↓</a></li>
           <li><b>Massively parallel cloud reprocessing.</b> Re-architected the cloud pipeline onto GCP Dataflow, redesigning how work is partitioned and scheduled to raise concurrency and cut end-to-end turnaround.</li>
           <li><b>Engineering leadership.</b> Lead and coordinate engineering across teams spanning three time zones — reviewing code and setting technical direction on a continuous-delivery cadence.</li>
         </ul>
@@ -302,7 +302,7 @@ footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); fon
     <div class="tl-item reveal">
       <div class="tl-when">Sep 2015 — Sep 2021</div>
       <div>
-        <div class="tl-role">Senior Software Engineer <span>(prev. System Software Engineer, Software Engineer)</span></div>
+        <div class="tl-role">Senior Software Engineer <span>(prev. Software Engineer)</span></div>
         <div class="tl-co">OpenText (formerly Webroot) · San Diego, CA</div>
         <div class="tl-ctx">Led internet-scale cybersecurity and threat-intelligence systems protecting end users across the web.</div>
         <ul class="tl-list">
@@ -359,7 +359,7 @@ footer{border-top:1px solid var(--line); padding:34px 0; color:var(--faint); fon
     <div class="card reveal">
       <span class="tag">Qualcomm · Reliability</span>
       <h3>Fleet health &amp; hardware tooling</h3>
-      <p>Prometheus-based fleet monitoring tracking each accelerator's health, firmware, and <b>Real-Time Factor</b> (how closely reprocessing matches ground truth), plus low-level IPMI/BMC power control and safe Kubernetes node lifecycle — servicing hardware without disrupting running jobs.</p>
+      <p>Prometheus-based fleet monitoring tracking each accelerator's health, firmware, and <b>Real-Time Factor</b> (processing time relative to the recorded drive's duration), plus low-level IPMI/BMC power control and safe Kubernetes node lifecycle — servicing hardware without disrupting running jobs.</p>
     </div>
     <div class="card reveal">
       <span class="tag">Webroot / OpenText · Patented</span>
